@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
                   if (snapshot.hasData) {
                     //Subscriber
                     return Text(
-                      snapshot.data ?? "Null Data",
+                      snapshot.data ?? "Null Data ",
                       style: const TextStyle(fontSize: 20),
                     );
                   } else {
