@@ -13,32 +13,32 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  StreamController<String> streamController = StreamController<String>();
+  StreamController<String> streamController = StreamController();
   late Stream<String> dataStream;
   TextEditingController textEditingController = TextEditingController();
 
   @override
   void initState() {
-  dataStream=streamController.stream.asBroadcastStream();
+    dataStream = streamController.stream.asBroadcastStream();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              //Subscriber1
               StreamBuilder<String>(
                 stream: dataStream,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    //Subscriber
                     return Text(
-                      snapshot.data ?? "Null Data ",
+                      snapshot.data!,
                       style: const TextStyle(fontSize: 20),
                     );
                   } else {
@@ -49,11 +49,11 @@ class _MyAppState extends State<MyApp> {
                   }
                 },
               ),
+              //Subscriber2
               StreamBuilder<String>(
                 stream: dataStream,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    //Subscriber
                     return Text(
                       snapshot.data ?? "Null Data",
                       style: const TextStyle(fontSize: 20),
@@ -66,16 +66,19 @@ class _MyAppState extends State<MyApp> {
                   }
                 },
               ),
+              //Space
               const SizedBox(
                 height: 20,
               ),
               //Text
-               SizedBox(
-                width: 200,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: TextField(
                   controller: textEditingController,
+                  decoration: InputDecoration(border: OutlineInputBorder()),
                 ),
               ),
+              //Space
               const SizedBox(
                 height: 20,
               ),
